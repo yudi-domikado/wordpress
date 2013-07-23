@@ -1,5 +1,6 @@
 <?php get_header('home'); ?>
-  <?php query_posts(array('post_type' => 'home')); ?>
+  <?php query_posts(array('post_type' => 'home'));
+  while(have_posts()) : the_post(); ?>
   <div id="da-slider">
     <!-- query post for magic fields -->
     <?php 
@@ -94,17 +95,21 @@
         <p class="tmore">Here Some of Our Client.</p>
       </div>
     </div>
-    <ul class="slides">
-      <?php
-      $client1 = get_group('client');
-      foreach($client1 as $clients) { ?>
-      <li>
-        <div class="listclient">
-          <img src="<?php echo $clients['client_client_image'][1]['thumb']; ?>"/>
-        </div>
-      </li>
-      <?php } ?>
-    </ul>
+    <div class="wrapclient-slider">
+      <ul class="slides">
+        <?php 
+        $client = get_group('client') ;    
+        $j = count($client[1]['client_client_image']);      
+        for ($i = 1;$i<= $j; $i++) :
+        ?>
+        <li>
+          <div class="listclient">
+            <img src="<?php echo $client[1]['client_client_image'][$i]['thumb']; ?>"/>
+          </div>
+        </li>
+        <?php endfor; ?>
+      </ul>
+    </div> <!-- end wrapclient-slider -->
   </div> <!-- end client -->
   <?php endwhile; wp_reset_query(); ?>
 

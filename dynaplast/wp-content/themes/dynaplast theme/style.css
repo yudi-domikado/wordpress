@@ -370,6 +370,15 @@ a.tmore:hover{
   width: 100%;
   text-align: center;
   float: left;
+  position: relative;
+}
+
+#client .flex-direction-nav .flex-prev{
+  left: 15.5%;
+}
+
+#client .flex-control-nav{
+  display: none;
 }
 
 #client h2{
@@ -382,7 +391,7 @@ a.tmore:hover{
 .client-left{
   background: url(images/bg-ourservice.png) repeat;
   width: 15.5%;
-  height: 132px;
+  height: 137px;
   float: left;
   border-right: 1px solid #e2e2e2;
 }
@@ -392,9 +401,14 @@ a.tmore:hover{
   display: table;
 }
 
+.wrapclient-slider{
+  margin: 0 auto;
+  display: table;
+  width: 80%;
+}
+
 .listclient{
-  width: 16%;
-  min-width: 120px;
+  width: 216px;
   height: 132px;
   float: left;
   opacity: 0.7;

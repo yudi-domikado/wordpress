@@ -9,6 +9,13 @@ $('.slider').flexslider({
   itemMargin: 0
 });
 
+$('.wrapclient-slider').flexslider({
+  animation: "slide",
+  animationLoop: true,
+  itemWidth: 216,
+  itemMargin: 0
+});
+
 $(function() {
   $('#da-slider').cslider({
     autoplay : true,
