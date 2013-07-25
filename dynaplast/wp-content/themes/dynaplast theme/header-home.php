@@ -17,6 +17,6 @@
 	<div id="container">
 		<div id="menu">
 			<a href="<?php bloginfo('url'); ?>"><div id="logo"></div></a>
-			<?php wp_nav_menu(array('menu' => 'Main Menu')); ?>
+			<?php wp_nav_menu(array( 'theme_location' => 'header_menu', 'container' => 'false' )); ?>
 		</div> <!-- end menu -->
 <?php wp_head(); ?>

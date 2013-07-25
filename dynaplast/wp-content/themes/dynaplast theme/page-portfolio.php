@@ -1,44 +1,19 @@
 <?php get_header(); ?>
 
 		<div class="wrapperas-portfolio">
-				<div class="whatwedo-list whatwedo-portfolio1">
-					<img src="<?php bloginfo('template_directory'); ?>/images/whatwedo-1.png" alt=""/>
-					<h2>PACKAGING</h2>
-					<h3>Classification:</h3>
-					<p class="whatwedolist">Food & Beverages</p>
-					<p class="whatwedolist">Pharmaceutical</p>
-					<p class="whatwedolist">Lubricant</p>
-					<a class="explore1" href="packaging.html">EXPLORE</a>
-				</div>
-				<div class="whatwedo-list whatwedo-portfolio2">
-					<img src="<?php bloginfo('template_directory'); ?>/images/whatwedo-2.png" alt=""/>
-					<h2>INDUSTRIAL</h2>
-					<h3>Classification:</h3>
-					<p class="whatwedolist">Pails</p>
-					<p class="whatwedolist">Jerry Can</p>
-					<p class="whatwedolist">Cartridges</p>
-					<a class="explore2" href="industrial.html">EXPLORE</a>
-				</div>
-				<div class="whatwedo-list whatwedo-portfolio3">
-					<img src="<?php bloginfo('template_directory'); ?>/images/whatwedo-3.png" alt=""/>
-					<h2>SPECIALITY MOULDED</h2>
-					<h3>Classification</h3>
-					<p class="whatwedolist">Bottle Crates</p>
-					<p class="whatwedolist">Tupperware</p>
-					<p class="whatwedolist">Home Appliances</p>
-					<p class="whatwedolist">Tooth Brush</p>
-					<p class="whatwedolist">Motorcycle Parts</p>
-					<a class="explore3" href="moulded.html">EXPLORE</a>
-				</div>
 
-				<div class="whatwedo-list whatwedo-portfolio4">
-					<img src="<?php bloginfo('template_directory'); ?>/images/whatwedo-4.png" alt=""/>
-					<h2>TECHNOLOGY</h2>
-					<h3>Classification:</h3>
-					<p class="whatwedolist">Aqua Cap</p>
-					<p class="whatwedolist">Dual Motor Oil Cap</p>
-					<a class="explore4" href="technology.html">EXPLORE</a>
-				</div>
+			<?php query_posts(array('post_type' => 'portfolio', 'order' => 'ASC'));
+	    while(have_posts()) : the_post();
+	    $portfolio = get_group('portfolio');
+	    foreach($portfolio as $portfolios) { ?>
+			<div class="whatwedo-list whatwedo-portfolio">
+				<img src="<?php echo $portfolios['portfolio_image'][1]['thumb']; ?>" alt=""/>
+				<h2><?php the_title(); ?></h2>
+				<h3>Classification:</h3>
+				<?php echo $portfolios['portfolio_classification'][1]; ?>
+				<a href="<?php the_permalink(); ?>">EXPLORE</a>
+			</div>
+			<?php } endwhile; wp_reset_query(); ?>
 		</div> <!-- end wrapperas -->
 
 			<div id="list-content">
@@ -74,22 +49,62 @@
 					<div class="clienttitle-portfolio">
 							<h2>OUR CLIENTS</h2>
 					</div>
-					<div class="listclient">
-						<img src="<?php bloginfo('template_directory'); ?>/images/penzoil.png" alt=""/>
-					</div>
-					<div class="listclient">
-						<img src="<?php bloginfo('template_directory'); ?>/images/tupperware.png" alt=""/>
-					</div>
-					<div class="listclient">
-						<img src="<?php bloginfo('template_directory'); ?>/images/philips.png" alt=""/>
-					</div>
-					<div class="listclient">
-						<img src="<?php bloginfo('template_directory'); ?>/images/unilever.png" alt=""/>
-					</div>
-					<div class="listclient">
-						<img src="<?php bloginfo('template_directory'); ?>/images/penzoil.png" alt=""/>
-					</div>
+					<ul class="slides">
+			        <?php query_posts(array('post_type' => 'home'));
+			        while(have_posts()) : the_post();
+			        $client = get_group('client');
+			        $j = count($client[1]['client_client_image']);      
+			        for ($i = 1;$i<= $j; $i++) :
+			        ?>
+			        <li>
+			          <div class="listclient">
+			            <img src="<?php echo $client[1]['client_client_image'][$i]['thumb']; ?>"/>
+			          </div>
+		        	</li>
+		     			<?php endfor; endwhile; wp_reset_query(); ?>
+		      </ul>
 				</div>
 			</div>
 
 <?php get_footer(); ?>
+
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/bjqs-1.3.min.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.flexslider.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/theme.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.slider-portfolio, .slider-portfolio2').flexslider({
+    animation: "slide",
+    slideshow: false,
+    animationLoop: true,
+  	itemWidth: 1024,
+  	itemMargin: 0
+	});
+
+	$('#list-content').load($('.whatwedo-portfolio:nth-child(1) a').attr('href'));
+	$('.wrapperas-portfolio a').click(function(){
+	var href = $(this).attr('href');
+	$('.slider-portfolio').fadeOut('fast').load(href).fadeIn('slow');
+	return false;
+	});
+
+	$('.whatwedo-portfolio:nth-child(1)').css('border-top', '8px solid #3ec0c3');
+	$(".whatwedo-portfolio:nth-child(1) a").css('background', '#3ec0c3');
+
+  $('.whatwedo-portfolio:nth-child(2)').css('border-top', '8px solid #f1a01e');
+  $(".whatwedo-portfolio:nth-child(2) a").css('background', '#f1a01e');
+
+  $('.whatwedo-portfolio:nth-child(3)').css('border-top', '8px solid #6ac074');
+  $(".whatwedo-portfolio:nth-child(3) a").css('background', '#6ac074');
+
+  $('.whatwedo-portfolio:nth-child(4)').css('border-top', '8px solid #00aeef');
+  $(".whatwedo-portfolio:nth-child(4) a").css('background', '#00aeef');
+
+	$('#client-portfolio').flexslider({
+	  animation: "slide",
+	  animationLoop: true,
+	  itemWidth: 216,
+	  itemMargin: 0
+	});
+});
+</script>

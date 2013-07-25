@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/style.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/css/flexslider.css">
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/css/dropkick.css">
+	<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/css/bjqs.css">
 	<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.1.8.3min.js"></script>
   <!--[if lt IE 9]>
     <script src="<?php bloginfo('template_directory'); ?>/js/html5shiv.js"></script>
@@ -17,7 +18,7 @@
 	<div id="container">
 		<div id="menu">
 			<a href="<?php bloginfo('url'); ?>"><div id="logo"></div></a>
-			<?php wp_nav_menu(array('menu' => 'Main Menu')); ?>
+			<?php wp_nav_menu(array( 'theme_location' => 'header_menu', 'container' => 'false' )); ?>
 		</div> <!-- end menu -->
 		<div id="maintitle">
 			<div class="wrap1024">

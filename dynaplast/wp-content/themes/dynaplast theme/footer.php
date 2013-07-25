@@ -35,7 +35,7 @@
 
 	<div id="footer">
 		<ul>
-			<?php wp_nav_menu(array('menu' => 'menu-footer')); ?>
+			<?php wp_nav_menu(array( 'theme_location' => 'footer_menu', 'container' => 'false' )); ?>
 		</ul>
 		<p>&copy; 2013 PT DYNAPLAST. All Right Reserved</p>
 	<p id="back-top">

@@ -1,4 +1,5 @@
 <?php get_header(); ?>
+<?php query_posts(array('post_type' => 'news', 'order' => 'ASC', 'orderby' => 'menu_order ASC')); ?>
 	<div id="navigatenews">
 		<ul>
 			<li id="child-1" class="active"><a>PRESS RELEASE</a></li>
@@ -8,88 +9,33 @@
 
 	<div id="contentnews">
 		<div class="wraplistem-news">
+		<?php while(have_posts()) : the_post(); ?>
+    <?php 
+    $news = get_group('news');
+    foreach($news as $newss) { ?>
 			<div class="listem">
-				<img src="<?php bloginfo('template_directory'); ?>/images/employe2.jpg" alt=""/>
+				<img src="<?php echo $newss['news_image'][1]['thumb']; ?>" alt=""/>
 				<div class="content-listem">
 					<p class="press-listem">PRESS RELEASE</p>
-					<h2>Dynaplast Go Private, <br/>
-					Saham Rp 4500...</h2>
-					<p class="date-listem">October 25, 2013</p>
+					<h2>
+						<?php if (strlen($post->post_title) > 39) {
+						echo substr(the_title($before = '', $after = '', FALSE), 0, 39) . '...'; } else {
+						the_title();
+						} ?>
+					</h2>
+					<p class="date-listem"><?php echo $newss['news_date'][1]; ?></p>
 				</div>
-				<p class="desc-listem">
-					Born 1955, Board member since 1990
-					Graduated in 1978 with First Class Honors in Industrial Engineering and the University Medal from the University of New South Wales, Australia. Joined PT Dynaplast the following year as Director and also served as Treasurer of the Indonesian Plastic Association (1987-1988)...
-				</p>
+				<span class="desc-listem">
+					<?php echo substr(get('news_content'),0,300); ?>...
+				</span>
 			</div>
-			<div class="listem">
-				<img src="<?php bloginfo('template_directory'); ?>/images/employe5.jpg" alt=""/>
-				<div class="content-listem">
-					<p class="press-listem">PRESS RELEASE</p>
-					<h2>PT Dynaplast Tbk. <br/>
-					Raih ISO 2000</h2>
-					<p class="date-listem">October 25, 2013</p>
-				</div>
-				<p class="desc-listem">
-					Born 1955, Board member since 1990
-					Graduated in 1978 with First Class Honors in Industrial Engineering and the University Medal from the University of New South Wales, Australia. Joined PT Dynaplast the following year as Director and also served as Treasurer of the Indonesian Plastic Association (1987-1988)...
-				</p>
-			</div>
-			<div class="listem">
-				<img src="<?php bloginfo('template_directory'); ?>/images/employe7.jpg" alt=""/>
-				<div class="content-listem">
-					<p class="press-listem">PRESS RELEASE</p>
-					<h2>Opening Pabrik Baru DP-9 di Cikarang</h2>
-					<p class="date-listem">October 25, 2013</p>
-				</div>
-				<p class="desc-listem">
-					Born 1955, Board member since 1990
-					Graduated in 1978 with First Class Honors in Industrial Engineering and the University Medal from the University of New South Wales, Australia. Joined PT Dynaplast the following year as Director and also served as Treasurer of the Indonesian Plastic Association (1987-1988)...
-				</p>
-			</div>
-		</div>
-		<div class="wraplistem-news">
-			<div class="listem">
-				<img src="<?php bloginfo('template_directory'); ?>/images/employe4.jpg" alt=""/>
-				<div class="content-listem">
-					<p class="press-listem">PRESS RELEASE</p>
-					<h2>Inovasi Packaging Minuman Dynaplast</h2>
-					<p class="date-listem">October 25, 2013</p>
-				</div>
-				<p class="desc-listem">
-					Born 1955, Board member since 1990
-					Graduated in 1978 with First Class Honors in Industrial Engineering and the University Medal from the University of New South Wales, Australia. Joined PT Dynaplast the following year as Director and also served as Treasurer of the Indonesian Plastic Association (1987-1988)...
-				</p>
-			</div>
-			<div class="listem">
-				<img src="<?php bloginfo('template_directory'); ?>/images/employe6.jpg" alt=""/>
-				<div class="content-listem">
-					<p class="press-listem">PRESS RELEASE</p>
-					<h2>Packaging Bertekstur Inovasi Dynaplast</h2>
-					<p class="date-listem">October 25, 2013</p>
-				</div>
-				<p class="desc-listem">
-					Born 1955, Board member since 1990
-					Graduated in 1978 with First Class Honors in Industrial Engineering and the University Medal from the University of New South Wales, Australia. Joined PT Dynaplast the following year as Director and also served as Treasurer of the Indonesian Plastic Association (1987-1988)...
-				</p>
-			</div>
-			<div class="listem">
-				<img src="<?php bloginfo('template_directory'); ?>/images/employe2.jpg" alt=""/>
-				<div class="content-listem">
-					<p class="press-listem">PRESS RELEASE</p>
-					<h2>Dynaplast Go Private, <br/>
-					Saham Rp 4500...</h2>
-					<p class="date-listem">October 25, 2013</p>
-				</div>
-				<p class="desc-listem">
-					Born 1955, Board member since 1990
-					Graduated in 1978 with First Class Honors in Industrial Engineering and the University Medal from the University of New South Wales, Australia. Joined PT Dynaplast the following year as Director and also served as Treasurer of the Indonesian Plastic Association (1987-1988)...
-				</p>
-			</div>
+			<?php } endwhile; ?>
 		</div>
 	</div> <!-- end contentnews -->
 
-	<a class="loadmore" href="#">LOAD MORE</a>
+	<a class="loadmore">LOAD MORE</a>
 
+<?php wp_reset_query(); ?>
 <?php get_footer(); ?>
 
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.flexslider.js"></script>
@@ -100,5 +46,8 @@
 		}).mouseout(function(){
 			$('img').stop().animate({marginTop: "0"}, 400);
 		});
+		$('.loadmore').click(function(){
+			$('.wraplistem-news').animate({height: '+=891'}, 800);
+		})
 	});
 </script>

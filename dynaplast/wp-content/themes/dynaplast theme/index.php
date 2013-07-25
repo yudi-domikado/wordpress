@@ -1,10 +1,9 @@
 <?php get_header('home'); ?>
-  <?php query_posts(array('post_type' => 'home'));
-  while(have_posts()) : the_post(); ?>
   <div id="da-slider">
     <!-- query post for magic fields -->
-    <?php 
-    $parallax = get_group('main_slider') ;    
+    <?php query_posts(array('post_type' => 'home'));
+    while(have_posts()) : the_post();
+    $parallax = get_group('main_slider');
     foreach($parallax as $parallaxs) { ?>
     <div id="workparallax" class="da-slide">
       <a class="da-link"><img src="<?php echo $parallaxs['main_slider_image'][1]['thumb']; ?>" alt=""/></a>
@@ -13,7 +12,7 @@
       <p><?php echo $parallaxs['main_slider_description'][1]; ?></p>
       </div>
     </div>
-    <?php } ?>
+    <?php } endwhile; wp_reset_query(); ?>
     <nav class="da-arrows">
       <span class="da-arrows-prev"></span>
       <span class="da-arrows-next"></span>
@@ -30,8 +29,9 @@
     </div>
     <div class="slider">
       <ul class="slides">
-        <?php
-        $slider = get_group('slider_our_service');    
+        <?php query_posts(array('post_type' => 'home'));
+        while(have_posts()) : the_post();
+        $slider = get_group('slider_our_service');
         foreach($slider as $sliders) { ?>
         <li>
           <div class="listpro">
@@ -41,51 +41,35 @@
               </div>
           </div>
         </li>
-        <?php } ?>
+        <?php } endwhile; wp_reset_query(); ?>
       </ul>
     </div><!-- end slider -->
   </div><!-- end section-top -->
 
   <div id="section-middle">
+    <?php query_posts(array('post_type' => 'news', 'order' => 'ASC', 'orderby' => 'menu_order ASC', 'posts_per_page' => 3)); ?>
+    <?php while(have_posts()) : the_post();
+    $news = get_group('news');
+    foreach($news as $newss) { ?>
     <div class="listem">
-      <img src="<?php bloginfo('template_directory'); ?>/images/employe1.jpg" alt=""/>
-    <div class="contenthover">
-          <h3>MAY 12, 2013</h3>
-          <p><a href="#" class="mybutton">READ NEWS</a></p>
-      </div>
-      <div class="content-listem">
-        <h2>Pembukaan Pabrik Baru <br/>
-        PT Dynaplast Tbk.</h2>
-        <p>Emiten PT Dynaplast Tbk (DYNA) berancang-ancang go private di Bursa Efek Indonesia BEI pada...</p>
-        <p><a class="tmore" href="#">MORE</a></p>
-      </div>
-    </div>
-    <div class="listem">
-      <img src="<?php bloginfo('template_directory'); ?>/http://2.bp.blogspot.com/-sOHh63utaLA/UGjtKR3YK9I/AAAAAAAAAf0/suMaozxSQHs/s1600/Java+Embedded+Offerings.png" alt=""/>
+      <img src="<?php echo $newss['news_image'][1]['thumb']; ?>" alt=""/>
       <div class="contenthover">
-          <h3>MAY 12, 2013</h3>
-          <p><a href="#" class="mybutton">READ NEWS</a></p>
+          <h3><?php echo $newss['news_date'][1]; ?></h3>
+          <p><a class="mybutton" href="<?php the_permalink(); ?>">READ NEWS</a></p>
       </div>
       <div class="content-listem">
-        <h2>Dynaplast Go Private, <br/>
-        Saham Rp 4500 Per Lembar</h2>
-        <p>Emiten PT Dynaplast Tbk (DYNA) berancang-ancang go private di Bursa Efek Indonesia BEI pada...</p>
-        <p><a class="tmore" href="#">MORE</a></p>
+        <h2>
+          <?php if (strlen($post->post_title) > 39) {
+          echo substr(the_title($before = '', $after = '', FALSE), 0, 39) . '...'; } else {
+          the_title();
+          } ?>
+        </h2>
+        <?php echo substr(get('news_content'),0,100); ?>...
+        <p><a class="tmore" href="<?php the_permalink(); ?>">MORE</a></p>
       </div>
-    </div>
-    <div class="listem">
-      <img src="<?php bloginfo('template_directory'); ?>/images/employe3.jpg" alt=""/>
-      <div class="contenthover">
-          <h3>MAY 12, 2013</h3>
-          <p><a href="#" class="mybutton">READ NEWS</a></p>
-      </div>
-      <div class="content-listem">
-        <h2>PT Dynaplast Tbk. <br/>
-        Raih ISO 2000</h2>
-        <p>Emiten PT Dynaplast Tbk (DYNA) berancang-ancang go private di Bursa Efek Indonesia BEI pada...</p>
-        <p><a class="tmore" href="#">MORE</a></p>
-      </div>
-    </div>
+    </div> <!-- end listem -->
+    
+    <?php } endwhile; wp_reset_query(); ?>
   </div><!-- end section middle -->
 
   <div id="client">
@@ -97,8 +81,9 @@
     </div>
     <div class="wrapclient-slider">
       <ul class="slides">
-        <?php 
-        $client = get_group('client') ;    
+        <?php query_posts(array('post_type' => 'home'));
+        while(have_posts()) : the_post();
+        $client = get_group('client');
         $j = count($client[1]['client_client_image']);      
         for ($i = 1;$i<= $j; $i++) :
         ?>
@@ -107,11 +92,10 @@
             <img src="<?php echo $client[1]['client_client_image'][$i]['thumb']; ?>"/>
           </div>
         </li>
-        <?php endfor; ?>
+        <?php endfor; endwhile; wp_reset_query(); ?>
       </ul>
     </div> <!-- end wrapclient-slider -->
   </div> <!-- end client -->
-  <?php endwhile; wp_reset_query(); ?>
 
  <?php get_footer(); ?>
 

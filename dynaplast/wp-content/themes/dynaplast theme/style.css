@@ -327,10 +327,12 @@ a.tmore:hover{
 #section-middle h2{
   font-size: 22px;
   color: #333333;
+  height: 60px;
 }
 
 #section-middle p{
   font-size: 15px;
+  line-height: 22px;
 }
 
 .listem{
@@ -1091,20 +1093,20 @@ p.radio label.cl2006 {
   position: relative;
 }
 
-.slider-portfolio1{
+.slider-portfolio{
   width: 1024px;
   height: 485px;
   margin: 0 auto;
 }
 
-.slider-portfolio1 h2{
+.slider-portfolio h2{
   float: right;
   font-size: 30px;
   width: 360px;
   margin: 108px 0 10px 0;
 }
 
-.slider-portfolio1 h3{
+.slider-portfolio h3{
   float: right;
   font-size: 14px;
   width: 360px;
@@ -1145,7 +1147,7 @@ p.radio label.cl2006 {
   opacity: 1;
 }
 
-.slider-portfolio1 p{
+.slider-portfolio p{
   float: right;
   width: 360px;
   height: 115px;
@@ -1154,7 +1156,7 @@ p.radio label.cl2006 {
   margin: 35px 0 0 0;
 }
 
-.sliderimg-portfolio1, .sliderimg-portfolio2, .sliderimg-portfolio3{
+.sliderimg-portfolio, .one, .two, .three, .four, .five{
   overflow: hidden;
   float: left;
   margin-top: 33px;
@@ -1163,11 +1165,7 @@ p.radio label.cl2006 {
   width: 580px;
 }
 
-.sliderimg-portfolio1-1 ul li{
-  width: 580px !important;
-}
-
-.sliderimg-portfolio1 ul li{
+.sliderimg-portfolio ul li{
   list-style: none;
 }
 
@@ -1212,10 +1210,16 @@ p.radio label.cl2006 {
 }
 
 #client-portfolio{
-  width: 100%;
-  float: left;
+  width: 1024px;
+  margin: 0 auto;
+  display: table;
   border-top: 1px solid #ebf0f2;
   height: 149px;
+  position: relative;
+}
+
+#client-portfolio .flex-control-nav, #client-portfolio .flex-direction-nav{
+  display: none;
 }
 
 .clienttitle-portfolio{
@@ -1231,7 +1235,6 @@ p.radio label.cl2006 {
 }
 
 #client-portfolio .listclient{
-  width: 20%;
   height: 100px;
 }
 
@@ -1431,34 +1434,6 @@ p.radio label.cl2006 {
   color: #ffffff;
   padding: 9px 18px;
   display: table;
-}
-
-.whatwedo-list a.explore1{
-  background: #3ec0c3;
-  border-radius: 108px;
-  position: absolute;
-  left: 38px;
-  bottom: 30px;
-}
-
-.whatwedo-list a.explore2{
-  background: #f1a01e;
-  border-radius: 108px;
-  position: absolute;
-  left: 38px;
-  bottom: 30px;
-}
-
-.whatwedo-list a.explore3{
-  background: #6ac074;
-  border-radius: 108px;
-  position: absolute;
-  left: 38px;
-  bottom: 30px;
-}
-
-.whatwedo-list a.explore4{
-  background: #00aeef;
   border-radius: 108px;
   position: absolute;
   left: 38px;
@@ -2399,6 +2374,8 @@ background-position: top right;
 
 .wraplistem-news{
   width: 1024px;
+  height: 891px;
+  overflow: hidden;
   margin: 0 auto;
 }
 
@@ -2417,20 +2394,20 @@ background-position: top right;
   padding: 26px;
 }
 
-
 .wraplistem-news .desc-listem{
   text-align: left;
   float: left;
   border-top: 1px solid #e2e2e2;
-  padding: 22px;
+  padding: 0 22px 22px 22px;
+  text-align: justify;
   margin: 0;
 }
 
 .wraplistem-news .content-listem h2{
   color: #333333;
   font-size: 22px;
+  height: 43px;
   line-height: 27px;
-  margin: 10px 0;
 }
 
 .wraplistem-news .content-listem p.press-listem{
@@ -2457,6 +2434,7 @@ a.loadmore{
   font-size: 20px;
   color: #ffffff;
   text-decoration: none;
+  cursor: pointer;
 }
 
 /*Geographical Paga*/
@@ -2468,8 +2446,8 @@ a.loadmore{
 }
 
 #geoaddresslist{
-  width: 100%;
-  margin: 0 auto;
+  width: 98%;
+  margin: 0 0 60px 45px;
   height: 220px;
   display: table;
 }
